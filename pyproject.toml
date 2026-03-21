@@ -1,0 +1,64 @@
+[project]
+name = "pile-o-bananas"
+dynamic = ["version"]
+authors = [
+  { name="BananaLoaf", email="bananaloaf@protonmail.com" },
+]
+description = "WE LOVE CASTING SPELLS"
+requires-python = ">=3.13"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "Operating System :: OS Independent",
+]
+license = "MIT"
+license-files = ["LICEN[CS]E*"]
+dependencies = [
+    "typer>=0.24.1",
+]
+
+[project.urls]
+Homepage = "https://github.com/BananaLoaf/pile-o-bananas"
+Documentation = "https://github.com/BananaLoaf/pile-o-bananas"
+Repository = "https://github.com/BananaLoaf/pile-o-bananas.git"
+Issues = "https://github.com/BananaLoaf/pile-o-bananas/issues"
+Changelog = "https://github.com/BananaLoaf/pile-o-bananas/releases"
+
+[dependency-groups]
+dev = [
+    "poethepoet>=0.42.1",
+    "ruff>=0.15.7",
+]
+
+
+
+
+[build-system]
+requires = ["hatchling", "uv-dynamic-versioning"]
+build-backend = "hatchling.build"
+
+[tool.hatch.version]
+source = "uv-dynamic-versioning"
+
+[tool.hatch.build]
+include = ["pile_o_bananas"]
+
+
+
+
+[tool.uv-dynamic-versioning]
+style = "semver"
+vcs = "git"
+fallback-version = "0.0.0"
+
+
+
+
+[project.scripts]
+cast = "pile_o_bananas.__main__:main"
+
+[project.gui-scripts]
+
+[tool.poe.tasks]
+lint-format = "ruff format ."
+lint-check = "ruff check --fix ."
+lint = ["lint-format", "lint-check"]

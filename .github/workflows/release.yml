@@ -9,6 +9,9 @@ jobs:
   release-python:
     name: release-python
     runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
 
     steps:
       - uses: actions/checkout@v6

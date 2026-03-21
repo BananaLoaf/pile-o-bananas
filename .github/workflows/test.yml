@@ -1,10 +1,13 @@
-name: Lint
+name: Test
 
-on: [push]
+on:
+  push:
+#  pull_request:
+#    types: [opened, synchronize, reopened]
 
 jobs:
-  lint-python:
-    name: lint-python
+  test-python:
+    name: test-python
     runs-on: ubuntu-latest
 
     steps:
@@ -23,8 +26,5 @@ jobs:
       - name: Install the project
         run: uv sync --locked --all-extras
 
-      - name: Ruff check
-        run: uv run ruff check .
-
-      - name: Ruff format
-        run: uv run ruff format --check .
+      - name: Test
+        run: uv run pytest

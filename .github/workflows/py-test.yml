@@ -1,17 +1,14 @@
-name: Release
+name: Python Test
 
 on:
   push:
-    tags:
-      - v*
+#  pull_request:
+#    types: [opened, synchronize, reopened]
 
 jobs:
-  release-python:
-    name: release-python
+  test:
+    name: test
     runs-on: ubuntu-latest
-    environment: pypi
-    permissions:
-      id-token: write
 
     steps:
       - uses: actions/checkout@v6
@@ -26,8 +23,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Build
-        run: uv build
+      - name: Install the project
+        run: uv sync --locked --all-extras
 
-      - name: Publish
-        run: uv publish
+      - name: Test
+        run: uv run pytest

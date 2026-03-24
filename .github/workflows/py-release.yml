@@ -1,11 +1,17 @@
-name: Lint
+name: Python Release
 
-on: [push]
+on:
+  push:
+    tags:
+      - v*
 
 jobs:
-  lint-python:
-    name: lint-python
+  release:
+    name: release
     runs-on: ubuntu-latest
+    environment: pypi
+    permissions:
+      id-token: write
 
     steps:
       - uses: actions/checkout@v6
@@ -20,11 +26,8 @@ jobs:
         with:
           enable-cache: true
 
-      - name: Install the project
-        run: uv sync --locked --all-extras
+      - name: Build
+        run: uv build
 
-      - name: Ruff check
-        run: uv run ruff check .
-
-      - name: Ruff format
-        run: uv run ruff format --check .
+      - name: Publish
+        run: uv publish

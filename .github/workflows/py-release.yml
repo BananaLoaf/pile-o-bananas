@@ -1,13 +1,14 @@
 name: Python Release
 
 on:
+  workflow_call:
   push:
     tags:
       - v*
 
 jobs:
-  release:
-    name: release
+  python-release:
+    name: python-release
     runs-on: ubuntu-latest
     environment: pypi
     permissions:

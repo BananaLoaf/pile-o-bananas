@@ -1,13 +1,14 @@
 name: Python Test
 
 on:
+  workflow_call:
   push:
 #  pull_request:
 #    types: [opened, synchronize, reopened]
 
 jobs:
-  test:
-    name: test
+  python-test:
+    name: python-test
     runs-on: ubuntu-latest
 
     steps:

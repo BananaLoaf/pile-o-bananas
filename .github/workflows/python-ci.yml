@@ -8,18 +8,22 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
+  # Runs lint, typecheck (disabled) and test on every push
   python-ci:
     uses: BananaLoaf/ci-cd/.github/workflows/python-ci.yml@master
     with:
       skip-typecheck: true
-      mypy-path: pile_o_bananas/
-      mypy-options: --ignore-missing-imports
+#      mypy-path: pile_o_bananas/
+#      mypy-options: --ignore-missing-imports
 
+  # Build python package if python-ci is OK. Runs on tags v*, PRs to master|main and pushed to master|main
   python-build:
-    needs: python-ci
-    if: startsWith(github.ref, 'refs/tags/v')
     uses: BananaLoaf/ci-cd/.github/workflows/python-build.yml@master
+    if: startsWith(github.ref, 'refs/tags/v') || github.ref == 'refs/heads/master' || github.ref == 'refs/heads/main' || github.base_ref == 'master' || github.base_ref == 'main'
+    name: python-build
+    needs: python-ci
 
+  # Releases built python package on tags v*
   python-release:
     if: startsWith(github.ref, 'refs/tags/v')
     name: python-release

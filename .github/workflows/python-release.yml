@@ -10,7 +10,7 @@ permissions:
 
 jobs:
   python-build:
-    uses: BananaLoaf/ci-cd/.github/workflows/py-build.yml@master
+    uses: BananaLoaf/ci-cd/.github/workflows/python-build.yml@master
 
   python-release:
     name: python-release
@@ -33,4 +33,3 @@ jobs:
 
       - name: Publish
         run: uv publish
-

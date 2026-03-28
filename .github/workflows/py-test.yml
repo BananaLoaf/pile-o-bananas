@@ -1,8 +1,0 @@
-name: Python Test
-
-on:
-  push:
-
-jobs:
-  python-test:
-    uses: BananaLoaf/ci-cd/.github/workflows/py-test.yml@master

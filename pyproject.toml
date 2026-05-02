@@ -5,7 +5,7 @@ authors = [
   { name="BananaLoaf", email="bananaloaf@protonmail.com" },
 ]
 description = "WE LOVE CASTING SPELLS"
-requires-python = ">=3.13"
+requires-python = ">=3.13,<3.14"
 classifiers = [
     "Programming Language :: Python :: 3",
     "Operating System :: OS Independent",

@@ -1,5 +1,8 @@
-FROM ghcr.io/astral-sh/uv:python3.13-bookworm-slim AS builder
+FROM python:3.13-slim AS builder
+ENV PIP_CACHE_DIR=/tmp/.cache/pip
 ENV UV_CACHE_DIR=/tmp/.cache/uv
+RUN --mount=type=cache,target=${PIP_CACHE_DIR} \
+    pip install uv==0.11.8
 WORKDIR /app
 
 COPY pyproject.toml uv.lock ./

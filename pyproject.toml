@@ -25,6 +25,7 @@ Changelog = "https://github.com/BananaLoaf/pile-o-bananas/releases"
 
 [dependency-groups]
 dev = [
+    "mypy>=1.20.2",
     "poethepoet>=0.42.1",
     "pytest>=9.0.2",
     "ruff>=0.15.7",
@@ -69,4 +70,5 @@ cast = "pile_o_bananas.__main__:main"
 lint-format = "ruff format ."
 lint-check = "ruff check --fix ."
 lint = ["lint-format", "lint-check"]
-pytest = "pytest"
+test = "pytest"
+typecheck = "mypy pile_o_bananas/"

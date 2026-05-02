@@ -1,0 +1,30 @@
+name: Docker Build
+
+on:
+  push:
+    branches: ["**"]
+    tags:
+      - v*
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  build-and-push:
+    uses: BananaLoaf/ci-cd/.github/workflows/docker-build.yml@master
+    permissions:
+      contents: read
+      packages: write
+    strategy:
+      matrix:
+        include:
+          - context: "."
+            dockerfile: Dockerfile
+            tag-suffix: ""
+            push: ${{ github.event_name == 'push' && startsWith(github.ref, 'refs/tags/v') }}
+    with:
+      context: ${{ matrix.context }}
+      dockerfile: ${{ matrix.dockerfile }}
+      tag-suffix: ${{ matrix.tag-suffix }}
+      push: ${{ matrix.push }}

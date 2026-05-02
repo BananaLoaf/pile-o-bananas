@@ -8,12 +8,11 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  # Runs lint, typecheck (disabled) and test on every push
+  # Runs lint, typecheck and test on every push
   python-ci:
     uses: BananaLoaf/ci-cd/.github/workflows/python-ci.yml@master
     with:
-      skip-typecheck: true
-#      mypy-options: pile_o_bananas/ --ignore-missing-imports
+      mypy-options: pile_o_bananas/
 
   # Build python package if python-ci is OK. Runs on tags v*, push or PRs to master
   python-build:

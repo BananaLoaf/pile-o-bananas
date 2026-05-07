@@ -8,7 +8,7 @@ WORKDIR /app
 COPY pyproject.toml uv.lock ./
 # or with --extra <EXTRA>
 RUN --mount=type=cache,target=${UV_CACHE_DIR} \
-    uv export --frozen --no-dev --all-extras --no-annotate --no-header --no-hashes --no-editable --no-emit-project -o requirements.txt
+    uv export --format requirements.txt -o requirements.txt --frozen --no-dev --all-extras --no-hashes --no-editable --no-emit-project
 
 COPY pile_o_bananas .
 RUN --mount=type=cache,target=${UV_CACHE_DIR} \

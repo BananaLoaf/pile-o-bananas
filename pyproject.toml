@@ -69,6 +69,7 @@ cast = "pile_o_bananas.__main__:main"
 [tool.poe.tasks]
 lint-format = "ruff format ."
 lint-check = "ruff check --fix ."
-lint = ["lint-format", "lint-check"]
+isort = "isort ."
+lint = ["isort", "lint-format", "lint-check"]
 test = "pytest"
 typecheck = "mypy pile_o_bananas/"
